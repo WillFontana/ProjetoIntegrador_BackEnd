@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoIntegrador.Enumns;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,5 +27,8 @@ namespace ProjetoIntegrador.Models
         [Required(ErrorMessage = "O CRN é um campo obrigatório!")]
         [StringLength(16, ErrorMessage = "O CRN inserido não é valido!")]
         public string Crn { get; set; }
+        [ForeignKey("GrauId")]
+        public virtual Grau Grau { get; set; }
+        public int GrauId { get; set; }
     }
 }

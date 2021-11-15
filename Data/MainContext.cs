@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegrador.Enumns;
 using ProjetoIntegrador.Models;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace ProjetoIntegrador.Data
         public MainContext(DbContextOptions<MainContext> opt) : base(opt) { }
 
         public DbSet<Professor> Professores { get; set; }
+        public DbSet<Grau> Graus { get; set; }
     }
 }
