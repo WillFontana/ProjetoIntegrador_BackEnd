@@ -14,5 +14,6 @@ namespace ProjetoIntegrador.Data
 
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Grau> Graus { get; set; }
+        public DbSet<Materia> Materias { get; set; }
     }
 }
