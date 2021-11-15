@@ -29,7 +29,7 @@ namespace ProjetoIntegrador.Controllers
             return _context.Materias;
         }
         [HttpGet("{codigo}")]
-        public IActionResult GetMateriaById(int codigo)
+        public IActionResult GetMateriaByCodigo(int codigo)
         {
             Materia materiaGet = _context.Materias.FirstOrDefault(materiaGet => materiaGet.Codigo == codigo);
 
@@ -49,7 +49,7 @@ namespace ProjetoIntegrador.Controllers
             _context.Materias.Add(newMateria);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetMateriaById), new { newMateria.Nome }, newMateria);
+            return CreatedAtAction(nameof(GetMateriaByCodigo), new { newMateria.Codigo }, newMateria);
         }
         [HttpPut("{codigo}")]
         public IActionResult UpdateMateria(int codigo, [FromBody] UpdateMateriaDto materiaDto)
