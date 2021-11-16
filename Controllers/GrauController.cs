@@ -16,7 +16,6 @@ namespace ProjetoIntegrador.Controllers
     {
         private MainContext _context;
         private IMapper _mapper;
-
         public GrauController(MainContext context, IMapper mapper)
         {
             _context = context;
@@ -32,7 +31,11 @@ namespace ProjetoIntegrador.Controllers
 
             return CreatedAtAction(nameof(GetGrauById), new { newGrau.Id }, newGrau);
         }
-
+        [HttpGet]
+        public IEnumerable<Grau> GetGraus()
+        {
+            return _context.Graus;
+        }
         [HttpGet("{id}")]
         public IActionResult GetGrauById(int id)
         {

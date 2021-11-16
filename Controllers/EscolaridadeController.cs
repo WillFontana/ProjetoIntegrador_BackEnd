@@ -30,6 +30,11 @@ namespace ProjetoIntegrador.Controllers
 
             return CreatedAtAction(nameof(GetEscolaridadeById), new { newEscolaridade.Id }, newEscolaridade);
         }
+        [HttpGet]
+        public IEnumerable<Escolaridade> GetEscolaridades()
+        {
+            return _context.Escolaridades;
+        }
         [HttpGet("{id}")]
         public IActionResult GetEscolaridadeById(int id)
         {

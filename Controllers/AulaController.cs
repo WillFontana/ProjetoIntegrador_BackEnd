@@ -65,20 +65,5 @@ namespace ProjetoIntegrador.Controllers
 
             return NoContent();
         }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteAula(int id)
-        {
-            Aula aulaDelete = _context.Aulas.FirstOrDefault(aulaDelete => aulaDelete.Id == id);
-            if (aulaDelete == null)
-            {
-                return NotFound();
-            }
-
-            _context.Remove(aulaDelete);
-            _context.SaveChanges();
-
-            return NoContent();
-
-        }
     }
 }
