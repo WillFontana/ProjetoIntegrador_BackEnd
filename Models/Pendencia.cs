@@ -9,7 +9,7 @@ namespace ProjetoIntegrador.Models
     public class Pendencia
     {
         [Key]
-        public int Codigo { get; set; }
+        public int Id { get; set; }
         //-------------------------------Valor
         [Required(ErrorMessage = "O nome é um campo obrigatório")]
         [MinLength(3, ErrorMessage = "O nome inserido não é valido")]
