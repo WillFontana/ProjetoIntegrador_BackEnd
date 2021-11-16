@@ -16,5 +16,6 @@ namespace ProjetoIntegrador.Data
         public DbSet<Grau> Graus { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<Pendencia> Pendencias { get; set; }
+        public DbSet<Aluno> Alunos { get; set; }
     }
 }
