@@ -1,0 +1,84 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using ProjetoIntegrador.Data;
+using ProjetoIntegrador.Data.Dtos.MateriaDtos;
+using ProjetoIntegrador.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ProjetoIntegrador.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class AulaController : ControllerBase 
+    {
+        private MainContext _context;
+        private IMapper _mapper;
+
+        public AulaController(MainContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public IEnumerable<Aula> GetAulas()
+        {
+            return _context.Aulas;
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetAulaById(int id)
+        {
+            Aula aulaGet = _context.Aulas.FirstOrDefault(aulaGet => aulaGet.Id == id);
+
+            if (aulaGet != null)
+            {
+                ReadAulaDto aulaDto = _mapper.Map<ReadAulaDto>(aulaGet);
+
+                return Ok(aulaDto);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult AddAula([FromBody] CreateAulaDto aulaDto)
+        {
+            Aula newAula = _mapper.Map<Aula>(aulaDto);
+
+            _context.Aulas.Add(newAula);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetAulaById), new { newAula.Id }, newAula);
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateAula(int id, [FromBody] UpdateAulaDto aulaDto)
+        {
+            Aula aulaUpdate = _context.Aulas.FirstOrDefault(aulaUpdate => aulaUpdate.Id == id);
+
+            if (aulaUpdate == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(aulaDto, aulaUpdate);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAula(int id)
+        {
+            Aula aulaDelete = _context.Aulas.FirstOrDefault(aulaDelete => aulaDelete.Id == id);
+            if (aulaDelete == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(aulaDelete);
+            _context.SaveChanges();
+
+            return NoContent();
+
+        }
+    }
+}
