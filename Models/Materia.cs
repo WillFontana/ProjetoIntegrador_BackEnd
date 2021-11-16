@@ -9,7 +9,7 @@ namespace ProjetoIntegrador.Models
     public class Materia
     {
         [Key]
-        public int Codigo { get; set; }
+        public int Id { get; set; }
         //------------------------------NOME
         [Required(ErrorMessage = "O nome é um campo obrigatório")]
         [MaxLength(255, ErrorMessage = "O nome inserido não é valido")]

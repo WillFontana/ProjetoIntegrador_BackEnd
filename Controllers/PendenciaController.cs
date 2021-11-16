@@ -28,10 +28,10 @@ namespace ProjetoIntegrador.Controllers
         {
             return _context.Pendencias;
         }
-        [HttpGet("{codigo}")]
-        public IActionResult GetPendenciaById(int codigo)
+        [HttpGet("{id}")]
+        public IActionResult GetPendenciaById(int id)
         {
-            Pendencia pendenciaGet = _context.Pendencias.FirstOrDefault(pendenciaGet => pendenciaGet.Codigo == codigo);
+            Pendencia pendenciaGet = _context.Pendencias.FirstOrDefault(pendenciaGet => pendenciaGet.Id == id);
 
             if (pendenciaGet != null)
             {
@@ -51,10 +51,10 @@ namespace ProjetoIntegrador.Controllers
 
             return CreatedAtAction(nameof(GetPendenciaById), new { newPendencia.Status }, newPendencia);
         }
-        [HttpPut("{codigo}")]
-        public IActionResult UpdatePendencia(int codigo, [FromBody] UpdatePendenciaDto pendenciaDto)
+        [HttpPut("{id}")]
+        public IActionResult UpdatePendencia(int id, [FromBody] UpdatePendenciaDto pendenciaDto)
         {
-            Pendencia pendenciaUpdate = _context.Pendencias.FirstOrDefault(pendenciaUpdate => pendenciaUpdate.Codigo == codigo);
+            Pendencia pendenciaUpdate = _context.Pendencias.FirstOrDefault(pendenciaUpdate => pendenciaUpdate.Id == id);
 
             if (pendenciaUpdate == null)
             {

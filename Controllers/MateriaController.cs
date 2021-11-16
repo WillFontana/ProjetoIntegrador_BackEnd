@@ -28,10 +28,10 @@ namespace ProjetoIntegrador.Controllers
         {
             return _context.Materias;
         }
-        [HttpGet("{codigo}")]
-        public IActionResult GetMateriaByCodigo(int codigo)
+        [HttpGet("{id}")]
+        public IActionResult GetMateriaByCodigo(int id)
         {
-            Materia materiaGet = _context.Materias.FirstOrDefault(materiaGet => materiaGet.Codigo == codigo);
+            Materia materiaGet = _context.Materias.FirstOrDefault(materiaGet => materiaGet.Id == id);
 
             if(materiaGet != null)
             {
@@ -49,12 +49,12 @@ namespace ProjetoIntegrador.Controllers
             _context.Materias.Add(newMateria);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetMateriaByCodigo), new { newMateria.Codigo }, newMateria);
+            return CreatedAtAction(nameof(GetMateriaByCodigo), new { newMateria.Id }, newMateria);
         }
-        [HttpPut("{codigo}")]
-        public IActionResult UpdateMateria(int codigo, [FromBody] UpdateMateriaDto materiaDto)
+        [HttpPut("{id}")]
+        public IActionResult UpdateMateria(int id, [FromBody] UpdateMateriaDto materiaDto)
         {
-            Materia materiaUpdate = _context.Materias.FirstOrDefault(materiaUpdate => materiaUpdate.Codigo == codigo);
+            Materia materiaUpdate = _context.Materias.FirstOrDefault(materiaUpdate => materiaUpdate.Id == id);
 
             if (materiaUpdate == null)
             {
@@ -65,10 +65,10 @@ namespace ProjetoIntegrador.Controllers
 
             return NoContent();
         }
-        [HttpDelete("{codigo}")]
-        public IActionResult DeleteMateria(int codigo)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMateria(int id)
         {
-            Materia materiaDelete = _context.Materias.FirstOrDefault(materiaDelete => materiaDelete.Codigo == codigo);
+            Materia materiaDelete = _context.Materias.FirstOrDefault(materiaDelete => materiaDelete.Id == id);
             if (materiaDelete == null)
             {
                 return NotFound();
