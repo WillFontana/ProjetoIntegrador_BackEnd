@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ProjetoIntegrador.Enumns;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,5 +25,8 @@ namespace ProjetoIntegrador.Models
         public string Cpf { get; set; }
         [Required(ErrorMessage = "O campo idade é obrigatório!")]
         public int Idade { get; set; }
+        [ForeignKey("EscolaridadeId")]
+        public virtual Escolaridade Escolaridade { get; set; }
+        public int EscolaridadeId { get; set; }
     }
 }
