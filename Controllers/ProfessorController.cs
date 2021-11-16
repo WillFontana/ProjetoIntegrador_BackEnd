@@ -27,7 +27,7 @@ namespace ProjetoIntegrador.Controllers
             return _context.Professores;
         }
         [HttpGet("{cpf}")]
-        public IActionResult GetProfessorById(string cpf)
+        public IActionResult GetProfessorByCpf(string cpf)
         {
             Professor professorGet = _context.Professores.FirstOrDefault(professorGet => professorGet.Cpf.Equals(cpf));
 
@@ -48,7 +48,7 @@ namespace ProjetoIntegrador.Controllers
             _context.Professores.Add(newProfessor);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetProfessorById), new { newProfessor.Cpf }, newProfessor);
+            return CreatedAtAction(nameof(GetProfessorByCpf), new { newProfessor.Cpf }, newProfessor);
         }
         [HttpPut("{cpf}")]
         public IActionResult UpdateProfessor(string cpf, [FromBody] UpdateProfessorDto professorDto)
