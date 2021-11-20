@@ -13,7 +13,10 @@ namespace ProjetoIntegrador.Profiles
        public MateriaProfile()
         {
             CreateMap<CreateMateriaDto, Materia>();
-            CreateMap<Materia, ReadMateriaDto>();
+            CreateMap<Materia, ReadMateriaDto>()
+                .ForMember(materia => materia.Aulas, opts => opts
+                .MapFrom(materia => materia.Aulas.Select
+                (aula => new { aula.Id, aula.DataInicio, aula.DataFinal, aula.Status })));
             CreateMap<UpdateMateriaDto, Materia>();
         }
     }

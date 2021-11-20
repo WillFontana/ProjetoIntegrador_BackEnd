@@ -24,5 +24,7 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         public int ProfessorId { get; set; }
         // -- Relacionamento com um aluno
         public int AlunoId { get; set; }
+        // -- Relacionamento com uma materia
+        public int MateriaId { get; set; }
     }
 }

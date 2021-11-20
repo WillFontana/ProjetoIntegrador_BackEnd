@@ -23,11 +23,15 @@ namespace ProjetoIntegrador.Models
         // -- status 
         [Required(ErrorMessage = "O status é um campo obrigatorio")]
         public string Status { get; set; }
+        
         // -- Relacionamento com um professor
         public virtual Professor Professor { get; set; }
         public int ProfessorId { get; set; }
         // -- Relacionamento com um aluno
         public virtual Aluno Aluno { get; set; }
         public int AlunoId { get; set; }
+        // -- Relacionamento com uma materia
+        public virtual Materia Materia { get; set; }
+        public int MateriaId { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         [MinLength(3, ErrorMessage = "O nome inserido não é valido!")]
         [MaxLength(255, ErrorMessage = "O valor inserido é muito grande para o nome!")]
         public string Nome { get; set; }
+        // -- Aulas
+        public object Aulas { get; set; }
     }
 }

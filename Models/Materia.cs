@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjetoIntegrador.Models
@@ -15,6 +16,9 @@ namespace ProjetoIntegrador.Models
         [MaxLength(255, ErrorMessage = "O nome inserido não é valido")]
         [MinLength(5, ErrorMessage = "O nome inserido não é valido")]
         public string Nome { get; set; }
+        // -- Relacionamento com varias aulas
+        [JsonIgnore]
+        public virtual List<Aula> Aulas { get; set; }
     }
 
 }

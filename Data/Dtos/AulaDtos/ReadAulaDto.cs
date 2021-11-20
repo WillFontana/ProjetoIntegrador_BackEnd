@@ -23,5 +23,6 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         // -- Retorno do professor
         public Models.Professor Professor { get; set; }
         public Models.Aluno Aluno { get; set; }
+        public Models.Materia Materia { get; set; }
     }
 }
