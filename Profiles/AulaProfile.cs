@@ -12,9 +12,9 @@ namespace ProjetoIntegrador.Profiles
     {
        public AulaProfile()
         {
-            CreateMap<CreateAulaDto, Materia>();
-            CreateMap<Materia, ReadAulaDto> ();
-            CreateMap<UpdateAulaDto, Materia>();
+            CreateMap<CreateAulaDto, Aula>();
+            CreateMap<Aula, ReadAulaDto> ();
+            CreateMap<UpdateAulaDto, Aula>();
         }
     }
 }

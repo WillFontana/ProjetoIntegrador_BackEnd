@@ -20,5 +20,7 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         // -- status 
         [Required(ErrorMessage = "O status é um campo obrigatorio")]
         public string status { get; set; }
+        // -- Relacionamento com o professor
+        public int ProfessorId { get; set; }
     }
 }

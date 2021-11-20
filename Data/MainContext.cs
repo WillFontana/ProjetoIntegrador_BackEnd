@@ -12,6 +12,11 @@ namespace ProjetoIntegrador.Data
     {
         public MainContext(DbContextOptions<MainContext> opt) : base(opt) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Aula>().HasOne(aula => aula.Professor).WithMany(professor => professor.Aulas).HasForeignKey(aula => aula.ProfessorId);
+        }
+
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<Aula> Aulas { get; set; }

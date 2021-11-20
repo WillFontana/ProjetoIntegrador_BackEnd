@@ -13,7 +13,10 @@ namespace ProjetoIntegrador.Profiles
         public ProfessorProfile()
         {
             CreateMap<CreateProfessorDto, Professor>();
-            CreateMap<Professor, ReadProfessorDto>();
+            CreateMap<Professor, ReadProfessorDto>()
+                .ForMember(professor => professor.Aulas, opts => opts
+                .MapFrom(professor => professor.Aulas.Select
+                (aula => new { aula.Id, aula.DataInicio, aula.DataFinal, aula.Status })));
             CreateMap<UpdateProfessorDto, Professor>();
         }
     }

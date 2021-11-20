@@ -21,5 +21,7 @@ namespace ProjetoIntegrador.Data.Dtos.ProfessorDtos
         [Required(ErrorMessage = "O CRN é um campo obrigatório!")]
         [StringLength(16, ErrorMessage = "O CRN inserido não é valido!")]
         public string Crn { get; set; }
+        // -- Aulas
+        public object Aulas { get; set; }
     }
 }
