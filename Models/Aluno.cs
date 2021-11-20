@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjetoIntegrador.Models
@@ -32,5 +33,8 @@ namespace ProjetoIntegrador.Models
         [ForeignKey("EscolaridadeId")]
         public virtual Escolaridade Escolaridade { get; set; }
         public int EscolaridadeId { get; set; }
+        // -- Relacionamento com varias aulas
+        [JsonIgnore]
+        public virtual List<Aula> Aulas { get; set; }
     }
 }

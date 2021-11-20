@@ -19,5 +19,7 @@ namespace ProjetoIntegrador.Data.Dtos.AlunoDto
         public string Cpf { get; set; }
         [Required(ErrorMessage = "O campo idade é obrigatório!")]
         public int Idade { get; set; }
+        // -- Aulas
+        public object Aulas { get; set; }
     }
 }

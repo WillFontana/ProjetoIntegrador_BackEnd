@@ -14,9 +14,11 @@ namespace ProjetoIntegrador.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Professor>().HasIndex(professor => professor.Crn).IsUnique();
+            builder.Entity<Aluno>().HasIndex(aluno => aluno.Cpf).IsUnique();
             builder.Entity<Aula>().HasOne(aula => aula.Professor).WithMany(professor => professor.Aulas).HasForeignKey(aula => aula.ProfessorId);
+            builder.Entity<Aula>().HasOne(aula => aula.Aluno).WithMany(aluno => aluno.Aulas).HasForeignKey(aula => aula.AlunoId);
         }
-
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<Aula> Aulas { get; set; }

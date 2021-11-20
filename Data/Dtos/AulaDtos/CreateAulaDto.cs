@@ -22,5 +22,7 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         public string status { get; set; }
         // -- Relacionamento com o professor
         public int ProfessorId { get; set; }
+        // -- Relacionamento com um aluno
+        public int AlunoId { get; set; }
     }
 }
