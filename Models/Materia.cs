@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoIntegrador.JoinEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace ProjetoIntegrador.Models
         // -- Relacionamento com varias aulas
         [JsonIgnore]
         public virtual List<Aula> Aulas { get; set; }
+        public virtual List<MateriasPorProfessor> ProfessoresQueEnsinam { get; set; }
     }
 
 }

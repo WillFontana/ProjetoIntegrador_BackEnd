@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoIntegrador.Enumns;
+using ProjetoIntegrador.JoinEntities;
 using ProjetoIntegrador.Models;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,11 @@ namespace ProjetoIntegrador.Data
             builder.Entity<Aula>().HasOne(aula => aula.Aluno).WithMany(aluno => aluno.Aulas).HasForeignKey(aula => aula.AlunoId);
             builder.Entity<Aula>().HasOne(aula => aula.Materia).WithMany(materia => materia.Aulas).HasForeignKey(aula => aula.MateriaId);
             // Relacionamentos n-n (professor e matérias)
-            
+            builder.Entity<MateriasPorProfessor>().HasOne(mpp => mpp.Professor).WithMany(professor => professor.MateriasDadas).HasForeignKey(mpp => mpp.ProfessorId);
+            builder.Entity<MateriasPorProfessor>().HasOne(mpp => mpp.Materia).WithMany(materia => materia.ProfessoresQueEnsinam).HasForeignKey(mpp => mpp.MateriaId);
             // Relacionamentos 1-n (Pendencias)
             builder.Entity<Pendencia>().HasOne(pendencia => pendencia.Professor).WithMany(professor => professor.Pendencias).HasForeignKey(pendencia => pendencia.ProfessorId);
             builder.Entity<Pendencia>().HasOne(pendencia => pendencia.Aluno).WithMany(aluno => aluno.Pendencias).HasForeignKey(pendencia => pendencia.AlunoId);
-
         }
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Materia> Materias { get; set; }
@@ -38,5 +39,6 @@ namespace ProjetoIntegrador.Data
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Grau> Graus { get; set; }
         public DbSet<Escolaridade> Escolaridades { get; set; }
+        public DbSet<MateriasPorProfessor> MateriasPorProfessors { get; set; }
     }
 }

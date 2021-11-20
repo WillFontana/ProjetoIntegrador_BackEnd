@@ -1,4 +1,5 @@
 ﻿using ProjetoIntegrador.Enumns;
+using ProjetoIntegrador.JoinEntities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,5 +41,7 @@ namespace ProjetoIntegrador.Models
         // -- Dividas de alunos
         [JsonIgnore]
         public virtual List<Pendencia> Pendencias { get; set; }
+        // -- Lista de matérias desse professor 
+        public virtual List<MateriasPorProfessor> MateriasDadas { get; set; }
     }
 }
