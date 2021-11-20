@@ -49,7 +49,7 @@ namespace ProjetoIntegrador.Controllers
             _context.Pendencias.Add(newPendencia);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetPendenciaById), new { newPendencia.Status }, newPendencia);
+            return CreatedAtAction(nameof(GetPendenciaById), new { newPendencia.Id, newPendencia.Valor }, newPendencia);
         }
         [HttpPut("{id}")]
         public IActionResult UpdatePendencia(int id, [FromBody] UpdatePendenciaDto pendenciaDto)

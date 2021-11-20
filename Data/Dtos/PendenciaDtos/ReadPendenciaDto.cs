@@ -11,10 +11,12 @@ namespace ProjetoIntegrador.Data.Dtos.PendenciaDtos
         //-------------------------------Valor
         [Required(ErrorMessage = "O nome é um campo obrigatório")]
         [MinLength(3, ErrorMessage = "O nome inserido não é valido")]
-        public double Valor { get; set; }
+        public string Valor { get; set; }
         // ------------------------------ Status
         [Required(ErrorMessage = "A Pendencia é um campo obrigatório")]
         [StringLength(255, ErrorMessage = "O Valor inserido é muito grande")]
         public string Status { get; set; }
+        public Models.Professor Professor { get; set; }
+        public Models.Aluno Aluno { get; set; }
     }
 }

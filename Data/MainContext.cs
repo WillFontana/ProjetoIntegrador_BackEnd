@@ -27,6 +27,9 @@ namespace ProjetoIntegrador.Data
             // Relacionamentos n-n (professor e matérias)
             
             // Relacionamentos 1-n (Pendencias)
+            builder.Entity<Pendencia>().HasOne(pendencia => pendencia.Professor).WithMany(professor => professor.Pendencias).HasForeignKey(pendencia => pendencia.ProfessorId);
+            builder.Entity<Pendencia>().HasOne(pendencia => pendencia.Aluno).WithMany(aluno => aluno.Pendencias).HasForeignKey(pendencia => pendencia.AlunoId);
+
         }
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Materia> Materias { get; set; }

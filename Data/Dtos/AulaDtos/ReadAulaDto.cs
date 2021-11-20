@@ -20,7 +20,6 @@ namespace ProjetoIntegrador.Data.Dtos.MateriaDtos
         // -- status 
         [Required(ErrorMessage = "O status é um campo obrigatorio")]
         public string status { get; set; }
-        // -- Retorno do professor
         public Models.Professor Professor { get; set; }
         public Models.Aluno Aluno { get; set; }
         public Models.Materia Materia { get; set; }

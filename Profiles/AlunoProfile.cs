@@ -17,6 +17,10 @@ namespace ProjetoIntegrador.Profiles
                 .ForMember(aluno => aluno.Aulas, opts => opts
                 .MapFrom(aluno => aluno.Aulas.Select
                 (aula => new { aula.Id, aula.DataInicio, aula.DataFinal, aula.Status })));
+            CreateMap<Professor, ReadAlunoDto>()
+                .ForMember(aluno => aluno.Pendencias, opts => opts
+                .MapFrom(aluno => aluno.Pendencias.Select
+                (pendencia => new { pendencia.Id, pendencia.Professor, pendencia.Status })));
             CreateMap<UpdateAlunoDto, Aluno>();
         }
     }

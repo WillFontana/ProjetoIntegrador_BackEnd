@@ -21,5 +21,7 @@ namespace ProjetoIntegrador.Data.Dtos.AlunoDto
         public int Idade { get; set; }
         // -- Aulas
         public object Aulas { get; set; }
+        // -- Pendências
+        public object Pendencias { get; set; }
     }
 }

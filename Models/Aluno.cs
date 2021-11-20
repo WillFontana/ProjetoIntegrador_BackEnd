@@ -35,5 +35,8 @@ namespace ProjetoIntegrador.Models
         // -- Relacionamento com varias aulas
         [JsonIgnore]
         public virtual List<Aula> Aulas { get; set; }
+        // -- Contas a pagar
+        [JsonIgnore]
+        public virtual List<Pendencia> Pendencias { get; set; }
     }
 }
