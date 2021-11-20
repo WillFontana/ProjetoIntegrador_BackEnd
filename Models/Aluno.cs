@@ -30,7 +30,6 @@ namespace ProjetoIntegrador.Models
         [MinLength(6, ErrorMessage = "A senha deve possuir no mínimo 6 caracteres!")]
         [MaxLength(12, ErrorMessage = "A senha deve possuir no máximo 12 caracteres!")]
         public string Senha { get; set; }
-        [ForeignKey("EscolaridadeId")]
         public virtual Escolaridade Escolaridade { get; set; }
         public int EscolaridadeId { get; set; }
         // -- Relacionamento com varias aulas

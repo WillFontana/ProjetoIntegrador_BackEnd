@@ -19,5 +19,7 @@ namespace ProjetoIntegrador.Data.Dtos.EscolaridadeDtos
         [Required(ErrorMessage = "A Descrição é obrigatório!")]
         [MaxLength(255, ErrorMessage = "O valor para a Descrição inserido é muito grande!")]
         public string Descricao { get; set; }
+        // -- Alunos
+        public object Alunos { get; set; }
     }
 }

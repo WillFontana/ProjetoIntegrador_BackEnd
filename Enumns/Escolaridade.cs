@@ -23,6 +23,6 @@ namespace ProjetoIntegrador.Enumns
         [MaxLength(255, ErrorMessage = "O valor para a Descrição inserido é muito grande!")]
         public string Descricao { get; set; }
         [JsonIgnore]
-        public virtual Aluno Aluno { get; set; }
+        public virtual List <Aluno> Alunos { get; set; }
     }
 }

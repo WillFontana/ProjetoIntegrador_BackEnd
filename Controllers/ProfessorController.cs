@@ -26,10 +26,10 @@ namespace ProjetoIntegrador.Controllers
         {
             return _context.Professores;
         }
-        [HttpGet("{cpf}")]
-        public IActionResult GetProfessorByCpf(string cpf)
+        [HttpGet("{crn}")]
+        public IActionResult GetProfessorByCpf(string crn)
         {
-            Professor professorGet = _context.Professores.FirstOrDefault(professorGet => professorGet.Cpf.Equals(cpf));
+            Professor professorGet = _context.Professores.FirstOrDefault(professorGet => professorGet.Crn.Equals(crn));
 
             if(professorGet != null)
             {
@@ -48,12 +48,12 @@ namespace ProjetoIntegrador.Controllers
             _context.Professores.Add(newProfessor);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetProfessorByCpf), new { newProfessor.Cpf }, newProfessor);
+            return CreatedAtAction(nameof(GetProfessorByCpf), new { newProfessor.Crn }, newProfessor);
         }
-        [HttpPut("{cpf}")]
-        public IActionResult UpdateProfessor(string cpf, [FromBody] UpdateProfessorDto professorDto)
+        [HttpPut("{crn}")]
+        public IActionResult UpdateProfessor(string crn, [FromBody] UpdateProfessorDto professorDto)
         {
-            Professor professorUpdate = _context.Professores.FirstOrDefault(professorUpdate => professorUpdate.Cpf.Equals(cpf));
+            Professor professorUpdate = _context.Professores.FirstOrDefault(professorUpdate => professorUpdate.Crn.Equals(crn));
 
             if (professorUpdate == null)
             {
@@ -64,10 +64,10 @@ namespace ProjetoIntegrador.Controllers
 
             return NoContent();
         }
-        [HttpDelete("{cpf}")]
-        public IActionResult DeleteProfessor(string cpf)
+        [HttpDelete("{crn}")]
+        public IActionResult DeleteProfessor(string crn)
         {
-            Professor professorDelete = _context.Professores.FirstOrDefault(professorDelete => professorDelete.Cpf.Equals(cpf));
+            Professor professorDelete = _context.Professores.FirstOrDefault(professorDelete => professorDelete.Crn.Equals(crn));
             if(professorDelete == null)
             {
                 return NotFound();

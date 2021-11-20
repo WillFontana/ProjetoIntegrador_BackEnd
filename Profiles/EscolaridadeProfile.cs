@@ -13,7 +13,10 @@ namespace ProjetoIntegrador.Profiles
         public EscolaridadeProfile()
         {
             CreateMap<CreateEscolaridadeDto, Escolaridade>();
-            CreateMap<Escolaridade, ReadEscolaridadeDto>();
+            CreateMap<Escolaridade, ReadEscolaridadeDto>()
+                .ForMember(escolaridade => escolaridade.Alunos, opts => opts
+                .MapFrom(escolaridade => escolaridade.Alunos.Select
+                (aluno => new { aluno.Id, aluno.Cpf, aluno.Nome})));
         }
     }
 }

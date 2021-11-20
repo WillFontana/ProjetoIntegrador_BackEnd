@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjetoIntegrador.Enumns
@@ -23,6 +23,6 @@ namespace ProjetoIntegrador.Enumns
         [MaxLength(255, ErrorMessage = "O valor para a Descrição inserido é muito grande!")]
         public string Descricao { get; set; }
         [JsonIgnore]
-        public virtual Professor Professor { get; set; }
+        public virtual List<Professor> Professores { get; set; }
     }
 }

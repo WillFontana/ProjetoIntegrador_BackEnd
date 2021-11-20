@@ -15,5 +15,7 @@ namespace ProjetoIntegrador.Data.Dtos.GrauDtos
         [Required(ErrorMessage = "A Descrição é obrigatório!")]
         [MaxLength(255, ErrorMessage = "O valor para a Descrição inserido é muito grande!")]
         public string Descricao { get; set; }
+        // -- Professores
+        public object Professores { get; set; }
     }
 }

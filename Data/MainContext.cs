@@ -14,8 +14,13 @@ namespace ProjetoIntegrador.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Chaves unicas
             builder.Entity<Professor>().HasIndex(professor => professor.Crn).IsUnique();
             builder.Entity<Aluno>().HasIndex(aluno => aluno.Cpf).IsUnique();
+            // Relacionaments 1-n (Enuns)
+            builder.Entity<Professor>().HasOne(professor => professor.Grau).WithMany(grau => grau.Professores).HasForeignKey(professor => professor.GrauId);
+            builder.Entity<Aluno>().HasOne(aluno => aluno.Escolaridade).WithMany(escolaridade => escolaridade.Alunos).HasForeignKey(aluno => aluno.EscolaridadeId);
+            // Relacionamentos 1-n (aulas)
             builder.Entity<Aula>().HasOne(aula => aula.Professor).WithMany(professor => professor.Aulas).HasForeignKey(aula => aula.ProfessorId);
             builder.Entity<Aula>().HasOne(aula => aula.Aluno).WithMany(aluno => aluno.Aulas).HasForeignKey(aula => aula.AlunoId);
         }
