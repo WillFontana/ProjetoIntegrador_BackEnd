@@ -10,8 +10,10 @@ namespace ProjetoIntegrador.Models
     {
         // id Usuario
         [Key]
+        [Required]
         public int Id { get; set; }
         // Senha
+        [Required(ErrorMessage = "A Senha é um campo obrigatório!")]
         public string Senha { get; set; }
         // Crn
         [Required(ErrorMessage = "O CRN é um campo obrigatório!")]
