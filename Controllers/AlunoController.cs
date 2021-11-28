@@ -87,7 +87,7 @@ namespace ProjetoIntegrador.Controllers
 
         }
         [HttpDelete("{cpf}")]
-        public IActionResult DeleteProfessor(string cpf)
+        public IActionResult DeleteAluno(string cpf)
         {
             try
             {

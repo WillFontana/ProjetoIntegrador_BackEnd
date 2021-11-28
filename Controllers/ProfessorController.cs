@@ -29,54 +29,83 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{crn}")]
         public IActionResult GetProfessorByCpf(string crn)
         {
-            Professor professorGet = _context.Professores.FirstOrDefault(professorGet => professorGet.Crn.Equals(crn));
-
-            if(professorGet != null)
+            try
             {
-                ReadProfessorDto professorDto = _mapper.Map<ReadProfessorDto>(professorGet);
+                Professor professorGet = _context.Professores.FirstOrDefault(professorGet => professorGet.Crn.Equals(crn));
 
-                return Ok(professorDto);
+                if (professorGet != null)
+                {
+                    ReadProfessorDto professorDto = _mapper.Map<ReadProfessorDto>(professorGet);
+
+                    return Ok(professorDto);
+                }
+
+                return NotFound();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
             }
 
-            return NotFound();
         }
         [HttpPost]
         public IActionResult AddProfessor([FromBody] CreateProfessorDto professorDto)
         {
-            Professor newProfessor = _mapper.Map<Professor>(professorDto);
+            try
+            {
+                Professor newProfessor = _mapper.Map<Professor>(professorDto);
 
-            _context.Professores.Add(newProfessor);
-            _context.SaveChanges();
+                _context.Professores.Add(newProfessor);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetProfessorByCpf), new { newProfessor.Crn }, newProfessor);
+                return CreatedAtAction(nameof(GetProfessorByCpf), new { newProfessor.Crn }, newProfessor);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpPut("{crn}")]
         public IActionResult UpdateProfessor(string crn, [FromBody] UpdateProfessorDto professorDto)
         {
-            Professor professorUpdate = _context.Professores.FirstOrDefault(professorUpdate => professorUpdate.Crn.Equals(crn));
-
-            if (professorUpdate == null)
+            try
             {
-                return NotFound();
+                Professor professorUpdate = _context.Professores.FirstOrDefault(professorUpdate => professorUpdate.Crn.Equals(crn));
+                if (professorUpdate == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(professorDto, professorUpdate);
+                _context.SaveChanges();
+                return NoContent();
             }
-            _mapper.Map(professorDto, professorUpdate);
-            _context.SaveChanges();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
 
-            return NoContent();
         }
         [HttpDelete("{crn}")]
         public IActionResult DeleteProfessor(string crn)
         {
-            Professor professorDelete = _context.Professores.FirstOrDefault(professorDelete => professorDelete.Crn.Equals(crn));
-            if(professorDelete == null)
+            try
             {
-                return NotFound();
+                Professor professorDelete = _context.Professores.FirstOrDefault(professorDelete => professorDelete.Crn.Equals(crn));
+                if (professorDelete == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Remove(professorDelete);
+                _context.SaveChanges();
+
+                return NoContent();
             }
-
-            _context.Remove(professorDelete);
-            _context.SaveChanges();
-
-            return NoContent();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
 
         }
     }

@@ -24,11 +24,19 @@ namespace ProjetoIntegrador.Controllers
         [HttpPost]
         public IActionResult AddEscolaridade([FromBody] CreateEscolaridadeDto escolaridadeDto)
         {
-            Escolaridade newEscolaridade= _mapper.Map<Escolaridade>(escolaridadeDto);
-            _context.Escolaridades.Add(newEscolaridade);
-            _context.SaveChanges();
+            try
+            {
+                Escolaridade newEscolaridade = _mapper.Map<Escolaridade>(escolaridadeDto);
+                _context.Escolaridades.Add(newEscolaridade);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetEscolaridadeById), new { newEscolaridade.Id }, newEscolaridade);
+                return CreatedAtAction(nameof(GetEscolaridadeById), new { newEscolaridade.Id }, newEscolaridade);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpGet]
         public IEnumerable<Escolaridade> GetEscolaridades()
@@ -38,16 +46,23 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEscolaridadeById(int id)
         {
-            Escolaridade getEscolaridade = _context.Escolaridades.FirstOrDefault(getEscolaridade => getEscolaridade.Id == id);
-
-            if (getEscolaridade != null)
+            try
             {
-                ReadEscolaridadeDto escolaridadeDto = _mapper.Map<ReadEscolaridadeDto>(getEscolaridade);
+                Escolaridade getEscolaridade = _context.Escolaridades.FirstOrDefault(getEscolaridade => getEscolaridade.Id == id);
 
-                return Ok(escolaridadeDto);
+                if (getEscolaridade != null)
+                {
+                    ReadEscolaridadeDto escolaridadeDto = _mapper.Map<ReadEscolaridadeDto>(getEscolaridade);
+
+                    return Ok(escolaridadeDto);
+                }
+                return NotFound();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
             }
 
-            return NotFound();
         }
     }
 }

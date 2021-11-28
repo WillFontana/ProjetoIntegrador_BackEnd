@@ -25,11 +25,19 @@ namespace ProjetoIntegrador.Controllers
         [HttpPost]
         public IActionResult AddGrau([FromBody] CreateGrauDto grauDto)
         {
-            Grau newGrau = _mapper.Map<Grau>(grauDto);
-            _context.Graus.Add(newGrau);
-            _context.SaveChanges();
+            try
+            {
+                Grau newGrau = _mapper.Map<Grau>(grauDto);
+                _context.Graus.Add(newGrau);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetGrauById), new { newGrau.Id }, newGrau);
+                return CreatedAtAction(nameof(GetGrauById), new { newGrau.Id }, newGrau);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpGet]
         public IEnumerable<Grau> GetGraus()
@@ -39,16 +47,23 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{id}")]
         public IActionResult GetGrauById(int id)
         {
-            Grau getGrau = _context.Graus.FirstOrDefault(getGrau => getGrau.Id == id);
-
-            if(getGrau != null)
+            try
             {
-                ReadGrauDto grauDto = _mapper.Map<ReadGrauDto>(getGrau);
+                Grau getGrau = _context.Graus.FirstOrDefault(getGrau => getGrau.Id == id);
 
-                return Ok(grauDto);
+                if (getGrau != null)
+                {
+                    ReadGrauDto grauDto = _mapper.Map<ReadGrauDto>(getGrau);
+
+                    return Ok(grauDto);
+                }
+
+                return NotFound();
             }
-
-            return NotFound();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
         }
     }
 }

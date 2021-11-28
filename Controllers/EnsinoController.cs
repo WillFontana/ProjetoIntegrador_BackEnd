@@ -46,14 +46,22 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEnsinoById(int id)
         {
-            MateriasPorProfessor ensinoGet = _context.MateriasPorProfessors.FirstOrDefault(ensinoGet => ensinoGet.Id == id);
-
-            if (ensinoGet != null)
+            try
             {
-                ReadMateriasPorProfessorDto ensinoGetDto = _mapper.Map<ReadMateriasPorProfessorDto>(ensinoGet);
-                return Ok(ensinoGet);
+                MateriasPorProfessor ensinoGet = _context.MateriasPorProfessors.FirstOrDefault(ensinoGet => ensinoGet.Id == id);
+
+                if (ensinoGet != null)
+                {
+                    ReadMateriasPorProfessorDto ensinoGetDto = _mapper.Map<ReadMateriasPorProfessorDto>(ensinoGet);
+                    return Ok(ensinoGet);
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
     }
 }

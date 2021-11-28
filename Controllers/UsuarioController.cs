@@ -24,16 +24,24 @@ namespace ProjetoIntegrador.Controllers
         [HttpPost]
         public IActionResult validaProfessor([FromBody] UsuarioDto usuarioDto)
         {
-            Usuario usuario = _context.Usuarios.FirstOrDefault(professorGet => professorGet.Crn.Equals(usuarioDto.Crn));
-
-            if (!(usuarioDto.Senha == usuario.Senha))
+            try
             {
-                return Unauthorized();
+                Usuario usuario = _context.Usuarios.FirstOrDefault(professorGet => professorGet.Crn.Equals(usuarioDto.Crn));
+
+                if (!(usuarioDto.Senha == usuario.Senha))
+                {
+                    return Unauthorized();
+                }
+
+                UsuarioDto usuarioRetoro = _mapper.Map<UsuarioDto>(usuario);
+
+                return Ok(usuarioRetoro);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
             }
 
-            UsuarioDto usuarioRetoro = _mapper.Map<UsuarioDto>(usuario);
-
-            return Ok(usuarioRetoro);
         }
     }
 }

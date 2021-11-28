@@ -31,39 +31,62 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{id}")]
         public IActionResult GetPendenciaById(int id)
         {
-            Pendencia pendenciaGet = _context.Pendencias.FirstOrDefault(pendenciaGet => pendenciaGet.Id == id);
-
-            if (pendenciaGet != null)
+            try
             {
-                ReadPendenciaDto pendenciaDto = _mapper.Map<ReadPendenciaDto>(pendenciaGet);
+                Pendencia pendenciaGet = _context.Pendencias.FirstOrDefault(pendenciaGet => pendenciaGet.Id == id);
 
-                return Ok(pendenciaDto);
+                if (pendenciaGet != null)
+                {
+                    ReadPendenciaDto pendenciaDto = _mapper.Map<ReadPendenciaDto>(pendenciaGet);
+
+                    return Ok(pendenciaDto);
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
         }
         [HttpPost]
         public IActionResult AddPendencia([FromBody] CreatePendenciaDto pendenciaDto)
         {
-            Pendencia newPendencia = _mapper.Map<Pendencia>(pendenciaDto);
+            try
+            {
+                Pendencia newPendencia = _mapper.Map<Pendencia>(pendenciaDto);
 
-            _context.Pendencias.Add(newPendencia);
-            _context.SaveChanges();
+                _context.Pendencias.Add(newPendencia);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetPendenciaById), new { newPendencia.Id }, newPendencia);
+                return CreatedAtAction(nameof(GetPendenciaById), new { newPendencia.Id }, newPendencia);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpPut("{id}")]
         public IActionResult UpdatePendencia(int id, [FromBody] UpdatePendenciaDto pendenciaDto)
         {
-            Pendencia pendenciaUpdate = _context.Pendencias.FirstOrDefault(pendenciaUpdate => pendenciaUpdate.Id == id);
-
-            if (pendenciaUpdate == null)
+            try
             {
-                return NotFound();
-            }
-            _mapper.Map(pendenciaDto, pendenciaUpdate);
-            _context.SaveChanges();
+                Pendencia pendenciaUpdate = _context.Pendencias.FirstOrDefault(pendenciaUpdate => pendenciaUpdate.Id == id);
 
-            return NoContent();
+                if (pendenciaUpdate == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(pendenciaDto, pendenciaUpdate);
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
     }
 }
