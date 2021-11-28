@@ -25,5 +25,6 @@ namespace ProjetoIntegrador.Data.Dtos.ProfessorDtos
         public object Aulas { get; set; }
         // -- Pendências
         public object Pendencias { get; set; }
+        public object MateriasDadas { get; set; }
     }
 }

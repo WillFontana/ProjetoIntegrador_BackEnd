@@ -13,10 +13,10 @@ namespace ProjetoIntegrador.Models
         public int Id { get; set; }
         // ---- Data Inicial
         [Required(ErrorMessage ="A data inicial é um campo obrigatorio")]
-        public DateTime DataInicio { get; set; }
+        public string DataInicio { get; set; }
         // --- Data Final
         [Required(ErrorMessage = "A data final é um campo obrigatorio")]
-        public DateTime DataFinal { get; set; }
+        public string DataFinal { get; set; }
         // --- Remarcada
         [Required(ErrorMessage = "O remarque é um campo obrigatório")]
         public bool Remarque { get; set; }
