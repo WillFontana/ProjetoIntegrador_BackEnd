@@ -30,6 +30,11 @@ namespace ProjetoIntegrador.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetEnsinoById), new { ensino.Id}, ensino);
         }
+        [HttpGet]
+        public IEnumerable<MateriasPorProfessor> GetEnsinos()
+        {
+            return _context.MateriasPorProfessors;
+        }
         [HttpGet("{id}")]
         public IActionResult GetEnsinoById(int id)
         {
