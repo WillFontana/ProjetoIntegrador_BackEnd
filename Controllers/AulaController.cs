@@ -12,7 +12,7 @@ namespace ProjetoIntegrador.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AulaController : ControllerBase 
+    public class AulaController : ControllerBase
     {
         private MainContext _context;
         private IMapper _mapper;
@@ -31,39 +31,63 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{id}")]
         public IActionResult GetAulaById(int id)
         {
-            Aula aulaGet = _context.Aulas.FirstOrDefault(aulaGet => aulaGet.Id == id);
-
-            if (aulaGet != null)
+            try
             {
-                ReadAulaDto aulaDto = _mapper.Map<ReadAulaDto>(aulaGet);
+                Aula aulaGet = _context.Aulas.FirstOrDefault(aulaGet => aulaGet.Id == id);
 
-                return Ok(aulaDto);
+                if (aulaGet != null)
+                {
+                    ReadAulaDto aulaDto = _mapper.Map<ReadAulaDto>(aulaGet);
+
+                    return Ok(aulaDto);
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpPost]
         public IActionResult AddAula([FromBody] CreateAulaDto aulaDto)
         {
-            Aula newAula = _mapper.Map<Aula>(aulaDto);
+            try
+            {
+                Aula newAula = _mapper.Map<Aula>(aulaDto);
 
-            _context.Aulas.Add(newAula);
-            _context.SaveChanges();
+                _context.Aulas.Add(newAula);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetAulaById), new { newAula.Id }, newAula);
+                return CreatedAtAction(nameof(GetAulaById), new { newAula.Id }, newAula);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpPut("{id}")]
         public IActionResult UpdateAula(int id, [FromBody] UpdateAulaDto aulaDto)
         {
-            Aula aulaUpdate = _context.Aulas.FirstOrDefault(aulaUpdate => aulaUpdate.Id == id);
-
-            if (aulaUpdate == null)
+            try
             {
-                return NotFound();
-            }
-            _mapper.Map(aulaDto, aulaUpdate);
-            _context.SaveChanges();
+                Aula aulaUpdate = _context.Aulas.FirstOrDefault(aulaUpdate => aulaUpdate.Id == id);
 
-            return NoContent();
+                if (aulaUpdate == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(aulaDto, aulaUpdate);
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
     }
 }

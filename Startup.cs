@@ -37,7 +37,6 @@ namespace ProjetoIntegrador
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjetoIntegrador", Version = "v1" });
             });
-            //services.AddHttpsRedirection(options => { options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect; options.HttpsPort = 5001; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,12 +48,8 @@ namespace ProjetoIntegrador
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjetoIntegrador v1"));
             }
-
-<<<<<<< HEAD
+            
             // app.UseHttpsRedirection();
-=======
-            //app.UseHttpsRedirection();
->>>>>>> 55ee3db8696f4b02f138e52df62af52be3cae7c6
 
             app.UseRouting();
 

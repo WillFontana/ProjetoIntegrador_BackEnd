@@ -25,10 +25,18 @@ namespace ProjetoIntegrador.Controllers
         [HttpPost]
         public IActionResult AddEnsino([FromBody] CreateMateriasPorProfessorDto ensinoDto)
         {
-            MateriasPorProfessor ensino = _mapper.Map<MateriasPorProfessor>(ensinoDto);
-            _context.MateriasPorProfessors.Add(ensino);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetEnsinoById), new { ensino.Id}, ensino);
+            try
+            {
+                MateriasPorProfessor ensino = _mapper.Map<MateriasPorProfessor>(ensinoDto);
+                _context.MateriasPorProfessors.Add(ensino);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetEnsinoById), new { ensino.Id }, ensino);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpGet]
         public IEnumerable<MateriasPorProfessor> GetEnsinos()
@@ -40,7 +48,7 @@ namespace ProjetoIntegrador.Controllers
         {
             MateriasPorProfessor ensinoGet = _context.MateriasPorProfessors.FirstOrDefault(ensinoGet => ensinoGet.Id == id);
 
-            if(ensinoGet != null)
+            if (ensinoGet != null)
             {
                 ReadMateriasPorProfessorDto ensinoGetDto = _mapper.Map<ReadMateriasPorProfessorDto>(ensinoGet);
                 return Ok(ensinoGet);

@@ -10,6 +10,7 @@ namespace ProjetoIntegrador.Profiles
         public GrauProfille()
         {
             CreateMap<CreateGrauDto, Grau>();
+            // Cria uma lista de professores, em que cada objeto tem o id, o crn e o nome desse professor
             CreateMap<Grau, ReadGrauDto>()
                 .ForMember(grau => grau.Professores, opts => opts
                 .MapFrom(grau => grau.Professores.Select

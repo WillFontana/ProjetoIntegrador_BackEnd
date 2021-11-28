@@ -20,6 +20,7 @@ namespace ProjetoIntegrador.Models
         // -- Relacionamento com varias aulas
         [JsonIgnore]
         public virtual List<Aula> Aulas { get; set; }
+        // Lista de vinculos de matéria por professor
         public virtual List<MateriasPorProfessor> ProfessoresQueEnsinam { get; set; }
     }
 

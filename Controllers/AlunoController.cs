@@ -30,54 +30,83 @@ namespace ProjetoIntegrador.Controllers
         [HttpGet("{cpf}")]
         public IActionResult GetalunoGetByCpf(string cpf)
         {
-            Aluno alunoGet = _context.Alunos.FirstOrDefault(alunoGet => alunoGet.Cpf.Equals(cpf));
-
-            if (alunoGet != null)
+            try
             {
-                ReadAlunoDto alunoDto = _mapper.Map<ReadAlunoDto>(alunoGet);
+                Aluno alunoGet = _context.Alunos.FirstOrDefault(alunoGet => alunoGet.Cpf.Equals(cpf));
+                if (alunoGet != null)
+                {
+                    ReadAlunoDto alunoDto = _mapper.Map<ReadAlunoDto>(alunoGet);
 
-                return Ok(alunoDto);
+                    return Ok(alunoDto);
+                }
             }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
 
             return NotFound();
         }
         [HttpPost]
         public IActionResult AddAluno([FromBody] CreateAlunoDto alunoDto)
         {
-            Aluno newAluno = _mapper.Map<Aluno>(alunoDto);
+            try
+            {
+                Aluno newAluno = _mapper.Map<Aluno>(alunoDto);
 
-            _context.Alunos.Add(newAluno);
-            _context.SaveChanges();
+                _context.Alunos.Add(newAluno);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetalunoGetByCpf), new { newAluno.Cpf }, newAluno);
+                return CreatedAtAction(nameof(GetalunoGetByCpf), new { newAluno.Cpf }, newAluno);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
         }
         [HttpPut("{cpf}")]
         public IActionResult UpdateAluno(string cpf, [FromBody] UpdateAlunoDto alunoDto)
         {
-            Aluno alunoUpdate = _context.Alunos.FirstOrDefault(alunoUpdate => alunoUpdate.Cpf.Equals(cpf));
-
-            if (alunoUpdate == null)
+            try
             {
-                return NotFound();
-            }
-            _mapper.Map(alunoDto, alunoUpdate);
-            _context.SaveChanges();
+                Aluno alunoUpdate = _context.Alunos.FirstOrDefault(alunoUpdate => alunoUpdate.Cpf.Equals(cpf));
+                if (alunoUpdate == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(alunoDto, alunoUpdate);
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+
         }
         [HttpDelete("{cpf}")]
         public IActionResult DeleteProfessor(string cpf)
         {
-            Aluno alunoDelete = _context.Alunos.FirstOrDefault(alunoDelete => alunoDelete.Cpf.Equals(cpf));
-            if (alunoDelete == null)
+            try
             {
-                return NotFound();
+                Aluno alunoDelete = _context.Alunos.FirstOrDefault(alunoDelete => alunoDelete.Cpf.Equals(cpf));
+                if (alunoDelete == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Remove(alunoDelete);
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
             }
 
-            _context.Remove(alunoDelete);
-            _context.SaveChanges();
-
-            return NoContent();
         }
     }
 }

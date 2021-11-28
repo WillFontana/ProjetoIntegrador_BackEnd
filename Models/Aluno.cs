@@ -26,9 +26,8 @@ namespace ProjetoIntegrador.Models
         public string Cpf { get; set; }
         [Required(ErrorMessage = "O campo idade é obrigatório!")]
         public int Idade { get; set; }
-        // [Required(ErrorMessage = "A senha é um campo obrigatório!")]
-        // [MinLength(6, ErrorMessage = "A senha deve possuir no mínimo 6 caracteres!")]
-        // [MaxLength(12, ErrorMessage = "A senha deve possuir no máximo 12 caracteres!")]
+        [MinLength(6, ErrorMessage = "A senha deve possuir no mínimo 6 caracteres!")]
+        [MaxLength(12, ErrorMessage = "A senha deve possuir no máximo 12 caracteres!")]
         public string Senha { get; set; }
         public virtual Escolaridade Escolaridade { get; set; }
         public int EscolaridadeId { get; set; }
